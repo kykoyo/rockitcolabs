@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyText
+  start: 2014-12-10 14:14:36
+  end: 2014-12-10 14:14:36
+  organizer_id: 1
+  participants_id: 1
+
+two:
+  title: MyString
+  description: MyText
+  start: 2014-12-10 14:14:36
+  end: 2014-12-10 14:14:36
+  organizer_id: 1
+  participants_id: 1
