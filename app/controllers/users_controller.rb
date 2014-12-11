@@ -3,16 +3,14 @@ class UsersController < ApplicationController
 		@users=User.all
 	end
 	def show
+		@user=User.find(params[:id])
+		@event=Event.all
 	end
-	def destroy
-	end
-	def edit
-	end
-	def update
-	end
-	def new
-	end
-	def create
+
+	private
+
+	def project_params
+		params[:user].permit(:name, :email, :phone)
 	end
 
 end
