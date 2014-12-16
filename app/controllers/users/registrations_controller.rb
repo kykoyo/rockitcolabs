@@ -1,15 +1,18 @@
 class Users::RegistrationsController <Devise::RegistrationsController
 	def index
-		@users=User.all
-	end
+		if current_user.user_type=='superadmin'
+			@users=User.all
+		else
+			@users=[current_user]
+		end
 
+	end
 
 	def new
 		super
 	end
 	def create
 		super
-		@user=User.new(user_params)
 	end
 
 	def edit

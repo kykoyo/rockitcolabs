@@ -9,4 +9,14 @@ class ApplicationController < ActionController::Base
 	def after_sign_out_path_for(resource_or_scope)
 		root_path
 	end
+
+	protected
+
+  	def configure_permitted_parameters
+    	devise_parameter_sanitizer.for(:sign_up) <<:name 
+    	devise_parameter_sanitizer.for(:sign_up) <<:phone
+    	devise_parameter_sanitizer.for(:sign_up) <<:user_type
+  	end
+	
+
 end
