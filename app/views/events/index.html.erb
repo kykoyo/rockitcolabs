@@ -1,0 +1,9 @@
+<ul>
+  <% @events.each do |event| %>
+	<li>
+		<%= event.title %>, 
+		<%= event.description %>, 
+		<%= event.owner.name %>
+	</li>
+  <% end %>
+</ul>

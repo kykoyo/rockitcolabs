@@ -1,5 +1,7 @@
 database structure
-  create_table "events", force: true do |t|
+
+    Event table
+    
     t.string   "title"
     t.text     "description"
     t.datetime "start"            # start time of the events
@@ -8,9 +10,10 @@ database structure
     t.integer  "participants_id"  # associated with user table
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
 
-  create_table "users", force: true do |t|
+
+    User table
+
     #added by devise
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -34,4 +37,3 @@ database structure
     t.datetime "ent_end"    # until this end time user is able to enter space
     t.integer  "event_id"   # associate with event table
     t.integer  "creator_id" # the superadmin/admin who created this user
-  end

@@ -1,0 +1,26 @@
+<h1>Your List</h1>
+
+<table>
+	<tr>
+		<td>Name</td>
+		<td>Type</td>
+		<td>Email</td>
+		<td>Phone</td>
+		<td>Adding Start Time</td>
+		<td>Adding End Time</td>
+		<td>Entering Start Time</td>
+		<td>Entering End Time</td>
+	</tr>
+	<% @users.each do |users| %>	
+	<tr>
+		<td><%= users.name %></td>
+		<td><%= users.user_type %></td>
+		<td><%= users.email %></td>
+		<td><%= users.phone %></td>
+		<td><%= users.add_start %></td>
+		<td><%= users.add_end %></td>
+		<td><%= users.ent_start %></td>
+		<td><%= users.ent_end %></td>
+	</tr>
+	<% end %>
+</table>
