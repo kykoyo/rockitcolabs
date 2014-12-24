@@ -1,0 +1,19 @@
+
+<%= form_for @event do |f| %>
+	<p>
+		<%= f.label :title %><br>
+		<%= f.text_field  :title %>
+	</p>
+	<p>
+		<%= f.label :description %><br>
+		<%= f.text_field  :description %>
+	</p>
+	<p>
+		<%= f.label :user_id %><br>
+		<%= f.collection_select(:users, User.all, :id, :name) %>
+	</p>
+
+	<p>
+		<%= f.submit %>
+	</p>
+<% end %>

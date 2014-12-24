@@ -22,15 +22,15 @@ class Users::RegistrationsController <Devise::RegistrationsController
 		super
 	end
 
+=begin
+	
 	private
-
-	def project_params
-		params[:user].permit(:name, :email, :phone)
+	def user_params
+		params[:user].permit(user_events_attributes: [:name, :email, :phone])
 	end
-
 	def set_user
 		@user=User.find(params[:id])
 	end
-
+=end
 
 end
