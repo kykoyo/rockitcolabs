@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20141224010029) do
     t.text     "description"
     t.datetime "start"
     t.datetime "end"
-    t.integer  "user_event_id"
     t.integer  "participants_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -51,7 +50,6 @@ ActiveRecord::Schema.define(version: 20141224010029) do
     t.datetime "add_end"
     t.datetime "ent_start"
     t.datetime "ent_end"
-    t.integer  "user_event_id"
     t.integer  "creator_id"
     t.string   "name"
   end
