@@ -1,7 +1,7 @@
 <h1>The Visitors list invited by <%= @user.name%></h1>
 
 <ul>
-	<% @users.event.each do |event| %>
+	<% @user.event.each do |event| %>
 	<li>
 		<%= event.name %>
 		:<%= events.description %>

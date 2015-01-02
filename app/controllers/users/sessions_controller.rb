@@ -1,6 +1,5 @@
 class Users::SessionsController <Devise::SessionsController
-	#filter logged in or not before going any page
-  	before_filter :authenticate_user!, :except => [:new]
+#	before_filter :authenticate_time, :only => 'create'
 
 	def new
 		super
@@ -9,4 +8,18 @@ class Users::SessionsController <Devise::SessionsController
 		super
 	end
 
+	def destroy
+		super
+	end
+=begin
+	private
+	def authenticate_time
+		expiration_time=[current_user.add_start, current_user.add_end]
+		current_time=Time.now
+		if current_time.between?(expiration_time[0], expiration_time[0])
+		else
+			redirect_to destroy_user_session_path
+		end
+	end
+=end
 end

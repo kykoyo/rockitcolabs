@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   }
 
   resources :events
-
+  get 'events/new_for_members' => 'events#new_for_members', as: 'new_event_for_members'
+  get 'events/create_for_members' => 'events#create_for_members', as: ''
 
   devise_scope :user do
     root :to => "users/sessions#new"
