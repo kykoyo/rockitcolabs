@@ -61,7 +61,7 @@ class EventsController < ApplicationController
           user_obj = User.find_by_email(email)
           # else create a user and associate to that user.
           if user_obj.nil?
-            user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111')
+            user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111', event_id: @event)
             # No user with that email
           end
           all_participants << user_obj
@@ -152,7 +152,7 @@ class EventsController < ApplicationController
             user_obj = User.find_by_email(email)
             # else create a user and associate to that user.
             if user_obj.nil?
-              user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111')
+              user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111', event_id: @event)
               # No user with that email
             end
             all_participants << user_obj
@@ -199,14 +199,15 @@ class EventsController < ApplicationController
 
   def edit
     @event=Event.find(params[:id])
-    user_info=""
-    User.find(@event.user).each do |user|
-      user_info<<user.email
-      user_info<<","
-      user_info<<user.name
-      user_info<<","
-      user_info<<user.phone
-      user_info<<"\n"
+    @user_info=""
+    user_obj=User.where(event_id: @event)
+    user_obj.each do |user|
+      @user_info<<user.email
+      @user_info<<", "
+      @user_info<<user.name
+      @user_info<<", "
+      @user_info<<user.phone
+      @user_info<<"\n"
     end
   end
 

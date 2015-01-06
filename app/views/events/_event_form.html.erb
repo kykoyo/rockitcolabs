@@ -23,8 +23,8 @@
 </p>
 <p>
 	<%= label_tag 'Participants Info' %>(email, name, phone number)<br>  
-	<% if f.user!=nil %>
-	<%= text_area_tag 'Participants_Info', user_info, row:5 %>
+	<% if User.where(event_id: f)!=nil %>
+	<%= text_area_tag 'Participants_Info', @user_info, row:5 %>
 	<% else %>
 	<%= text_area_tag 'Participants_Info', nil, rows: 5 %>
 	<% end %>

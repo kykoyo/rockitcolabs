@@ -1,19 +1,10 @@
 <h2>Current Events</h2>
 
-<ul>
-  <% @events.each do |event| %>
-	<li>
-		Title: <%= event.title %><br>
-		Author: <%= event.owner.name %><br>
-		Description: <%= event.description %>
-	</li>
-  <% end %>
-</ul>
 <table>
+	<% @events.each do |event| %>
 	<tr>
 		<td>
 			<table>
-				<% @events.each do |event| %>	
 				<tr>
 					<td>Title:</td>
 					<td><%= event.title %></td>
@@ -26,10 +17,8 @@
 					<td>Description:</td>
 					<td><%= event.description %></td>
 				</tr>
-				<% end %>
 			</table>
 		</td>
-		<% @events.each do |event| %>
 		<td>
 			<%= link_to image_tag("button_edit.png"), edit_event_path(event.id) %>
 		</td>
@@ -37,6 +26,8 @@
 			<%= link_to image_tag("button_delete.png"), events_path(event.id), method: :delete, data: {
 			confirm: "are you sure?"} %>
 		</td>
-		<% end %>
 	</tr>
+	<tr>
+	</tr>
+	<% end %>
 </table>
