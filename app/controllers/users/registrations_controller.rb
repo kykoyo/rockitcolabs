@@ -26,6 +26,11 @@ class Users::RegistrationsController <Devise::RegistrationsController
 	def update
 		super
 	end
+	def show
+		
+	end
+	def day_pass
 
+	end
 
 end

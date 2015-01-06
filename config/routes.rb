@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   
   devise_scope :user do
     root :to => "users/sessions#new"
+    get 'users/day_pass' => 'users/registrations#day_pass', as: 'day_pass'
     get 'users(.:format)' => 'users/registrations#index', as: 'users'
     get 'users/:id' => 'users/registrations#show', as: 'user'
 
