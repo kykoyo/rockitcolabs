@@ -1,5 +1,4 @@
 class EventsController < ApplicationController
-  #before_filter :authenticate_member, :only => 'new'
 
   def index
     @events = Event.all
@@ -25,7 +24,7 @@ class EventsController < ApplicationController
   
 	def create
     #making a new event with using attributes of title and description
-	  p=params[:event].permit(:title, :description)
+	  p=params[:event].permit(:title, :description, :start, :end)
 	  @event=Event.new(p)
 
     #setting user_id sent from views, collection_select
@@ -35,12 +34,17 @@ class EventsController < ApplicationController
     # This user is the owner of the event.
 	  @event.owner=user_obj
 
+    #Check if the setting events time is valid or not
+    if @event.start>@event.end
+      flash[:error]<<"Invalid Start Time or End Time"
+    end
+
     # Take all the lines in the results of the text area tag
+    # all_lines should be an array
     input = params[:Participants_Info]
     all_lines=input.split("\n")
-    # all_lines  should be an array
-    # For each line:
 
+    # For each line:
     #initialize flash[:errors] <-(error message) to be an array
     flash[:errors] = []
     all_participants = []
@@ -111,7 +115,7 @@ class EventsController < ApplicationController
     end
   end
 
-
+=begin
   def create_for_member
     p=params[:event].permit(:title, :description)
     @event=Event.new(p)
@@ -188,7 +192,7 @@ class EventsController < ApplicationController
       render 'new'
     end
   end
-
+=end
 
   def destroy
     @event=Event.find(params[:id])

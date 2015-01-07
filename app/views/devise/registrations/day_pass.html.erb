@@ -7,7 +7,7 @@
 <script>
   var handler = StripeCheckout.configure({
     key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-    image: '/square-image.png',
+    image: 'rockit_logo.png',
     token: function(token) {
         token.email
         token.name
@@ -38,7 +38,7 @@
 <script>
   var handler = StripeCheckout.configure({
     key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-    image: '/square-image.png',
+    image: 'rockit_logo.png',
     token: function(token) {
         token.email
         token.name
@@ -51,9 +51,9 @@
   $('#DayPassButton2').on('click', function(e) {
     // Open Checkout with further options
     handler.open({
-      name: 'DayPass for 1 day',
-      description: '1 day pass($10.00)',
-      amount: 1000
+      name: 'DayPass for 3 days',
+      description: '3 day passes($25.00)',
+      amount: 2500
     });
     e.preventDefault();
   });
@@ -69,7 +69,7 @@
 <script>
   var handler = StripeCheckout.configure({
     key: 'pk_test_6pRNASCoBOKtIshFeQd4XMUh',
-    image: '/square-image.png',
+    image: 'rockit_logo.png',
     token: function(token) {
         token.email
         token.name
@@ -82,9 +82,9 @@
   $('#DayPassButton5').on('click', function(e) {
     // Open Checkout with further options
     handler.open({
-      name: 'DayPass for 1 day',
-      description: '1 day pass($10.00)',
-      amount: 1000
+      name: 'DayPass for 5 days',
+      description: '5 day passes($40.00)',
+      amount: 4000
     });
     e.preventDefault();
   });

@@ -22,6 +22,14 @@
 	<%= f.collection_select(:users, User.all, :id, :name) %>
 </p>
 <p>
+    <%= f.label :start %><br>
+    <%= f.datetime_select :start, :discard_year => true, :default => Time.now%>
+</p>
+<p>
+    <%= f.label :end %><br>
+    <%= f.datetime_select :end, :discard_year => true, :default => Time.now+1.hour %>
+</p>
+<p>
 	<%= label_tag 'Participants Info' %>(email, name, phone number)<br>  
 	<% if User.where(event_id: f)!=nil %>
 	<%= text_area_tag 'Participants_Info', @user_info, row:5 %>
