@@ -18,16 +18,23 @@
 	<%= f.text_field  :description %>
 </p>
 <p>
+	<!-- only admin can choose the event owner.
+	otherwise, current_user would be the owner. -->
+	<% if current_user.user_type=='superadmin' %>
 	<%= f.label :user_id %><br>
 	<%= f.collection_select(:users, User.all, :id, :name) %>
+	<% else %>
+	Owner<br>
+	<li><%= User.find(current_user).name %></li>
+	<% end %>
 </p>
 <p>
     <%= f.label :start %><br>
-    <%= f.datetime_select :start, :discard_year => true, :default => Time.now%>
+    <%= f.datetime_select :start, :default => Time.now%>
 </p>
 <p>
     <%= f.label :end %><br>
-    <%= f.datetime_select :end, :discard_year => true, :default => Time.now+1.hour %>
+    <%= f.datetime_select :end, :default => Time.now+1.hour %>
 </p>
 <p>
 	<%= label_tag 'Participants Info' %>(email, name, phone number)<br>  

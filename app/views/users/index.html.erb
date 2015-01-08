@@ -10,6 +10,10 @@
 		<td>Adding End Time</td>
 		<td>Entering Start Time</td>
 		<td>Entering End Time</td>
+		<% if current_user.user_type=='superadmin' %>
+		<td>Edit</td>
+		<td>Delete</td>
+		<% end %>
 	</tr>
 	<% @users.each do |users| %>	
 	<tr>
@@ -21,6 +25,18 @@
 		<td><%= users.add_end %></td>
 		<td><%= users.ent_start %></td>
 		<td><%= users.ent_end %></td>
+		<% if current_user.user_type=='superadmin' %>
+		<td>
+			<%= link_to image_tag("button_edit.png"), edit_user_registration_path(users.id) %>
+		</td>
+		<td>
+			<%= link_to image_tag("button_delete.png"), destroy_user_path(users.id), method: :delete, data: {
+			confirm: "are you sure?"} %>
+		</td>
+		<% end %>
 	</tr>
 	<% end %>
 </table>
+<br>
+<br>
+<%= link_to image_tag("button_events.png"), events_path %>

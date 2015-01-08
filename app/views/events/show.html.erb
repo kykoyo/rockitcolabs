@@ -1,3 +1,5 @@
+<h2>Your Event has applied</h2>
+
 <ul>
   <li>
     Title: <%= @event.title %><br>
@@ -5,3 +7,7 @@
 	Description: <%= @event.description %>
   </li>
 </ul>
+<br>
+<br>
+<%= link_to image_tag("button_events.png"), events_path %>
+

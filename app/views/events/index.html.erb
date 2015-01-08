@@ -1,4 +1,7 @@
-<h2>Current Events</h2>
+<h2>Current Events </h2>
+<% unless current_user.user_type=='member' && @counter>=1 %>
+<%= link_to image_tag("button_add_events.png"), new_event_path %>
+<% end %>
 
 <table>
 	<% @events.each do |event| %>
@@ -11,7 +14,11 @@
 				</tr>
 				<tr>
 					<td>Author:</td>
+					<% if event.owner==nil %>
+					<td></td>
+					<% else %>
 					<td><%= event.owner.name %></td>
+					<% end %>
 				</tr>
 				<tr>
 					<td>Description:</td>
@@ -23,7 +30,7 @@
 			<%= link_to image_tag("button_edit.png"), edit_event_path(event.id) %>
 		</td>
 		<td>
-			<%= link_to image_tag("button_delete.png"), events_path(event.id), method: :delete, data: {
+			<%= link_to image_tag("button_delete.png"), destroy_events_path(event.id), method: :delete, data: {
 			confirm: "are you sure?"} %>
 		</td>
 	</tr>

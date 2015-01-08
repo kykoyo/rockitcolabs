@@ -1,18 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users, :controllers => {
-    :sessions => 'users/sessions', 
-    :registrations => 'users/registrations'
-  }
+
+  devise_for :users
+
+  get 'users/day_pass' => 'users#day_pass', as: 'day_pass'
+  match 'users/:id'=> 'users#destroy', :via => :delete, :as => :destroy_user
+  resources :users, :except => :destroy
 
   get 'events/new_for_member' => 'events#new_for_member', as: 'new_event_for_member'
   get 'events/create_for_member' => 'events#create_for_member', as: ''
-  resources :events
+  match 'events/:id'=> 'events#destroy', :via => :delete, :as => :destroy_events
+  resources :events, :except => :destroy
   
   devise_scope :user do
-    root :to => "users/sessions#new"
-    get 'users/day_pass' => 'users/registrations#day_pass', as: 'day_pass'
-    get 'users(.:format)' => 'users/registrations#index', as: 'users'
-    get 'users/:id' => 'users/registrations#show', as: 'user'
+    root :to => "devise/sessions#new"
 
   end
   # The priority is based upon order of creation: first created -> highest priority.
