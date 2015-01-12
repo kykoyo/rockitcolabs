@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     def destroy
         @user=User.find(params[:id])
         flash[:errors]=[]
+        if current_user.user_type=='superadmin'
         if @user==current_user
             flash[:errors]<<"You can't delete yourself"
         else
@@ -23,6 +24,9 @@ class UsersController < ApplicationController
         end
         if @user.destroy
             redirect_to root_path, notice: "User deleted."
+        end
+        else
+            flash[:errors]<<'Invalid user'
         end
     end
 

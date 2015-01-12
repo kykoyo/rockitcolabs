@@ -3,13 +3,12 @@ Rails.application.routes.draw do
   devise_for :users
 
   get 'users/day_pass' => 'users#day_pass', as: 'day_pass'
-  match 'users/:id'=> 'users#destroy', :via => :delete, :as => :destroy_user
-  resources :users, :except => :destroy
+  #match 'users/:id'=> 'users#destroy', :via => :delete, :as => :destroy_user
+  resources :users#, :except => :destroy
 
   get 'events/new_for_member' => 'events#new_for_member', as: 'new_event_for_member'
   get 'events/create_for_member' => 'events#create_for_member', as: ''
-  match 'events/:id'=> 'events#destroy', :via => :delete, :as => :destroy_events
-  resources :events, :except => :destroy
+  resources :events
   
   devise_scope :user do
     root :to => "devise/sessions#new"

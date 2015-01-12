@@ -24,13 +24,19 @@
 					<td>Description:</td>
 					<td><%= event.description %></td>
 				</tr>
+				<% event.users.each do |user| %>
+				<tr>
+					<td>Participants:</td>
+					<td><%= user.name %></td>
+				</tr>
+				<% end %>
 			</table>
 		</td>
 		<td>
 			<%= link_to image_tag("button_edit.png"), edit_event_path(event.id) %>
 		</td>
 		<td>
-			<%= link_to image_tag("button_delete.png"), destroy_events_path(event.id), method: :delete, data: {
+			<%= link_to image_tag("button_delete.png"), event_path(event.id), method: :delete, data: {
 			confirm: "are you sure?"} %>
 		</td>
 	</tr>

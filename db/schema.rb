@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150106190933) do
+ActiveRecord::Schema.define(version: 20150112181755) do
 
   create_table "events", force: true do |t|
     t.string   "title"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150106190933) do
     t.integer  "creator_id"
     t.string   "name"
     t.integer  "event_id"
+    t.integer  "counter"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

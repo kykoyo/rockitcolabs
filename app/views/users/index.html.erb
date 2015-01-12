@@ -30,7 +30,7 @@
 			<%= link_to image_tag("button_edit.png"), edit_user_registration_path(users.id) %>
 		</td>
 		<td>
-			<%= link_to image_tag("button_delete.png"), destroy_user_path(users.id), method: :delete, data: {
+			<%= link_to image_tag("button_delete.png"), user_path(users.id), method: :delete, data: {
 			confirm: "are you sure?"} %>
 		</td>
 		<% end %>

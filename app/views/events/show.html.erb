@@ -4,8 +4,11 @@
   <li>
     Title: <%= @event.title %><br>
 	Author: <%= @event.owner.name %><br>
-	Description: <%= @event.description %>
-  </li>
+	Description: <%= @event.description %><br>
+    <% @event.users.each do |user| %>
+    Participants: <%= user.name %><br>
+    <% end %>
+    </li>
 </ul>
 <br>
 <br>
