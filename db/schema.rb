@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150112181755) do
+ActiveRecord::Schema.define(version: 20150113211532) do
+
+  create_table "charges", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "day",        limit: 255
+  end
 
   create_table "events", force: true do |t|
     t.string   "title"

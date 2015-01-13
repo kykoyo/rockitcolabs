@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+    <div class="stable_header">
+    <div class="container">
+        <%= link_to image_tag("rockit_logo.png"), root_path %>
+        <h1>RockIT CoLabs Entrance</h1>
+        <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+        <% if user_signed_in? %> 
+          <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+          <!-- *_path はUserモデルを作成したときに、
+            deviseにより自動で作成されてますので、rake routesで確認できます -->
+          <%= link_to image_tag('button_logout.png', :class => "button_right"),  destroy_user_session_path, method: :delete %> 
+          
+          <%= link_to image_tag('button_profile.png', :class => "button_left"), edit_user_registration_path  %>
+
+        <% else %>
+          <%= link_to image_tag('button_login.png', :class => "button_left"), new_user_session_path %> 
+          <!--
+          <%= link_to image_tag('button_signup.png', :class => "button_right"), new_user_registration_path %>
+          -->
+        <% end %>
+    </div>
+    </div>
+<div class="body">
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+  <%= yield %>
+</div>
+</body>
+</html>

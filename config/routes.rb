@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get 'users/day_pass' => 'users#day_pass', as: 'day_pass'
   #match 'users/:id'=> 'users#destroy', :via => :delete, :as => :destroy_user
   resources :users#, :except => :destroy
 
@@ -10,6 +9,9 @@ Rails.application.routes.draw do
   get 'events/create_for_member' => 'events#create_for_member', as: ''
   resources :events
   
+  #get 'charges/day_pass' => 'charges#day_pass', as: 'day_pass'
+  resources :charges
+
   devise_scope :user do
     root :to => "devise/sessions#new"
 

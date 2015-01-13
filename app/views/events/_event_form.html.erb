@@ -37,7 +37,7 @@
     <%= f.datetime_select :end, :default => Time.now+1.hour %>
 </p>
 <p>
-	<%= label_tag 'Participants Info' %>(email, name, phone number)<br>  
+	<%= label_tag 'Participants Info' %>(ex: email, name, phone number)<br>  
 	<%= text_area_tag 'Participants_Info', @user_info, row:5 %>
 </p>
 
