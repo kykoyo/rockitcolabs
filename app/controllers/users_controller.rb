@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
-    before_filter :authenticate_user!
+    #before_filter :authenticate_user!
+    
+    #clarify if preuser's expired time is valid or not
+    before_filter :check_valid_pre_user, only: :index
+
     def index
+        @pre_user=PreUser.new
         if current_user==nil
             redirect_to root_path
         #show all users if superadmin
@@ -37,4 +42,16 @@ class UsersController < ApplicationController
         p=params[:user].permit(:name, :email, :phone, :password)
         @user.update(p)
     end
+
+    private
+
+
+  def check_valid_pre_user
+    @pre_users=PreUser.all
+    @pre_users.each do |pre_user|
+      if pre_user.expired_time<Time.now
+        pre_user.destroy
+      end
+    end
+  end
 end

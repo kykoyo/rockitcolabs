@@ -37,4 +37,16 @@ Rails.application.configure do
 
   # Setting of devise of which decribes host name when sending an email
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  #SMTP setting for ActionMailer
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address:               'smtp.gmail.com',
+  port:                  587,
+  domain:                'example.com',
+  user_name:             'kykoyo1992@gmail.com',
+  password:              'kakinotane',
+  authentication:        'plain',
+  enable_starttls_auto:  true
+}
 end

@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  post 'pre_users', to: 'pre_user#create', as: 'pre_users'
 
-  #match 'users/:id'=> 'users#destroy', :via => :delete, :as => :destroy_user
-  resources :users#, :except => :destroy
+  devise_for :users
+  resources :users
 
   get 'events/new_for_member' => 'events#new_for_member', as: 'new_event_for_member'
   get 'events/create_for_member' => 'events#create_for_member', as: ''

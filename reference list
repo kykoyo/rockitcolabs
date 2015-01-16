@@ -7,3 +7,9 @@ https://stripe.com/docs/checkout/guides/rails
 
 random password generator
 http://stackoverflow.com/questions/88311/how-best-to-generate-a-random-string-in-ruby
+
+random routes generator
+http://stackoverflow.com/questions/5670704/assigning-random-url-to-a-resource-in-rails-3
+http://qiita.com/ainame/items/eb9dcf7862630c44d5e9
+
+

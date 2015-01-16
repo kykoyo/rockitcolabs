@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
   #need to log in before going any pages
-#  before_filter :authenticate_user!
+  before_filter :authenticate_user!
+
 
   protect_from_forgery with: :exception
   def after_sign_in_path_for(resource_or_scope)
@@ -22,6 +23,5 @@ class ApplicationController < ActionController::Base
   	devise_parameter_sanitizer.for(:sign_up) <<:phone
   	devise_parameter_sanitizer.for(:sign_up) <<:user_type
 	end
-	
 
 end
