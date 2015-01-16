@@ -1,6 +1,9 @@
 class EnterController < ApplicationController
+  include UserActions
     def enter
-        p=params[:user].permit(:email, :password)
+      #        p=params[:user].permit(:email, :password)
+      p = user_permitted_params(params[:user])
+      
         @user=User.find_by_email(p.email)
         flash[:errors]=[]
         if @user.password==p.password
