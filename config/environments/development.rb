@@ -1,4 +1,9 @@
-Rails.application.configure do
+  require 'dotenv'
+  Dotenv.load
+
+  Rails.application.configure do
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -45,8 +50,10 @@ Rails.application.configure do
   port:                  587,
   domain:                'example.com',
   user_name:             'kykoyo1992@gmail.com',
-  password:              'kakinotane',
+  password:              ENV["gmail_app_password"],
   authentication:        'plain',
   enable_starttls_auto:  true
-}
+  }
+  ActionMailer::Base.raise_delivery_errors = true
+
 end

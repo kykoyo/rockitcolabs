@@ -14,7 +14,7 @@ class PreUserController < ApplicationController
                 AutoMail.auto_mail(@pre_user).deliver
 
                 format.html{redirect_to users_path, notice: 'Invitation has successfully sent.'}
-                format.json{render :show, status: :created, location: @pre_user}
+                format.json{render json: @pre_user}
             else
                 format.html{render :new}
                 format.json{render json: @pre_user.errors, status: :unprocessable_entity}

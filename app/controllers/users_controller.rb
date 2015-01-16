@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     #before_filter :authenticate_user!
     
     #clarify if preuser's expired time is valid or not
-    before_filter :check_valid_pre_user, only: :index
+    #before_filter :check_valid_pre_user, only: :index
 
     def index
         @pre_user=PreUser.new
