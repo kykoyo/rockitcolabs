@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   post 'pre_users', to: 'pre_user#create', as: 'pre_users'
 
   devise_for :users, :controllers => {
-    :registrations => 'users/registrations'
+    :registrations => 'users/registrations',
+    :sessions => 'users/sessions',
+    :password => 'users/password'
   }
   resources :users
 
