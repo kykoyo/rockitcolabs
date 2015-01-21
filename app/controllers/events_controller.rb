@@ -18,6 +18,7 @@ class EventsController < ApplicationController
 
 	def new
     @event=Event.new
+    @token=(0...8).map { (65 + rand(26)).chr }.join
 
     #filtering if member and redirecting to new_for_member.
     #picking all events current_user has
@@ -36,24 +37,41 @@ class EventsController < ApplicationController
 
   
 	def create
+    flash[:errors]=[]
 
-	  p=params[:event].permit(:title, :description, :start, :end)
-	  @event=Event.new(p)
+    #prevent duplicating events from back button or logs
+    duplicate_event=Event.find_by_token(params[:event][:token])
+    if duplicate_event.nil?
+    else
+      flash[:errors]<<'Something went wrong.'
+    end
+
+    p=params[:event].permit(:title, :description, :start, :end, :token)
+    @event=Event.new(p)
 
     # filter2: checking the time of event is valid
     if @event.start>=@event.end
-      flash[:error]<<"Invalid Start Time or End Time"
+      flash[:errors]<<"Invalid Start Time or End Time"
     end
 
     setting_user
 
+    #DO NOT save any events or users until no errors
     if flash[:errors].size == 0
       @event.save
+
+      #set owner's entering time 1 hour earlier/later from events
+      owner=@event.owner
+      if owner.user_type=='instructor'
+        owner.ent_start=@event.start-60*60
+        owner.ent_end=@event.end+60*60
+      end
+
+      render 'show'
     else
       # There were some errors - we don't save anything to the db.
-      render 'edit'
+      render 'new'
     end
-    
 
 	end
 
@@ -65,6 +83,7 @@ class EventsController < ApplicationController
 
   def new_for_member
     @event=Event.new
+    @token=(0...8).map { (65 + rand(26)).chr }.join
 
     #filtering if non-member or not
     if current_user.user_type!='member'
@@ -100,9 +119,17 @@ class EventsController < ApplicationController
     @event=Event.find(params[:id])
     p=params[:event].permit(:title, :description, :start, :end)
 
+    flash[:errors]=[]
+
+    #prevent duplicating events
+    duplicate_event=Event.where(token: @event.token)
+    if duplicate_event.size>=2
+      flash[:errors]<<'Something went wrong.'
+    end
+
     # filter2: checking the time of event is valid
     if @event.start>=@event.end
-      flash[:error]<<"Invalid Start Time or End Time"
+      flash[:errors]<<"Invalid Start Time or End Time"
     end
 
 
@@ -110,6 +137,7 @@ class EventsController < ApplicationController
 
     if flash[:errors].size == 0
       @event.update(p)
+      render 'show'
     else
       # There were some errors - we don't save anything to the db.
       render 'edit'
@@ -141,53 +169,48 @@ class EventsController < ApplicationController
     all_lines=input.split("\n")
 
     # For each line:
-    # initialize flash[:errors] <-(error message) to be an array
-    flash[:errors] = []
     all_participants = []
 
+    #for each line, split comma by comma and get the data into email, name, phone
+    
+    all_lines.each do |line|
 
-    #filter3: member can only add 2 or less guests
-    unless current_user.user_type=='member' && all_lines.size>2
+      data=line.split(',')
 
-      #for each line, split comma by comma and get the data into email, name, phone
-      
-      all_lines.each do |line|
-
-        data=line.split(',')
-
-        #filter4: checking if there are exactly 3 data
-        if data.size==3  
-          data_array=data.map do |data_strip|
-            data_strip.strip
-          end
-
-          #filter5: checking if email data containing @ or not
-          email=data_array[0]
-          if email.include?('@')
-            name=data_array[1]
-            phone=data_array[2] 
-
-            #filter6: check if the participant is an existing user by email
-            # if there is a user by that email - associate that user to the event
-            user_obj = User.find_by_email(email)
-            # else create a user and associate to that user.
-            if user_obj.nil?
-              user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111')
-            end
-            all_participants << user_obj
-
-            #error messages
-          else
-            flash[:errors] << "Line #{line} doesn't have a valid email."
-          end
-        else
-          flash[:errors] << "Line #{line} doesn't have 3 entries"
+      #filter4: checking if there are exactly 3 data
+      if data.size==3  
+        data_array=data.map do |data_strip|
+          data_strip.strip
         end
+
+        #filter5: checking if email data containing @ or not
+        email=data_array[0]
+        if email.include?('@')
+          name=data_array[1]
+          phone=data_array[2] 
+
+          #filter6: check if the participant is an existing user by email
+          # if there is a user by that email - associate that user to the event
+          user_obj = User.find_by_email(email)
+          # else create a user and associate to that user.
+          if user_obj.nil?
+            user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111')
+          end
+          all_participants << user_obj
+
+          #error messages
+        else
+          flash[:errors] << "Line #{line} doesn't have a valid email."
+        end
+      else
+        flash[:errors] << "Line #{line} doesn't have 3 entries"
       end
-    else
-      flash[:errors]<<"Members are only allowed to invite 2 or less guests."
     end
-    # all_participants now has all the user objects - some of which are already in the db, and some are not.
+
+    if @event.owner.user_type=='member' && @event.users.size+all_participants.size>2
+      flash[:errors]<<'Member can invite up to 2 guests.'
+    end
+  # all_participants now has all the user objects - some of which are already in the db, and some are not.
     if flash[:errors].size == 0
       all_participants.each do |selected_user|
         # We don't know if this selected user is saved in the database
@@ -199,12 +222,8 @@ class EventsController < ApplicationController
           @event.users << selected_user
         end
       end
-      
-      render 'show' # meaning: use the show view in the views/events folder
-    else
-      # There were some errors - we don't save anything to the db.
-      render 'edit'
     end
+
     
   end
 

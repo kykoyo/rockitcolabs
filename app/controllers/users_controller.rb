@@ -39,19 +39,22 @@ class UsersController < ApplicationController
         @user=User.find(params[:id])        
     end
     def update
-        p=params[:user].permit(:name, :email, :phone, :password)
-        @user.update(p)
+        user_params=params[:user].permit(:add_start, :add_end, :ent_start, :ent_end)
+        @user=User.find(params[:id])
+        @user.update(user_params)
+        flash[:notice]='Changes submitted'
+        redirect_to users_path
     end
 
     private
 
 
-  def check_valid_pre_user
-    @pre_users=PreUser.all
-    @pre_users.each do |pre_user|
-      if pre_user.expired_time<Time.now
-        pre_user.destroy
-      end
+    def check_valid_pre_user
+        @pre_users=PreUser.all
+        @pre_users.each do |pre_user|
+        if pre_user.expired_time<Time.now
+            pre_user.destroy
+        end
     end
-  end
+    end
 end

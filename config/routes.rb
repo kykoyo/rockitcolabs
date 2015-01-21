@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   post 'pre_users', to: 'pre_user#create', as: 'pre_users'
 
-  devise_for :users
+  devise_for :users, :controllers => {
+    :registrations => 'users/registrations'
+  }
   resources :users
 
   get 'events/new_for_member' => 'events#new_for_member', as: 'new_event_for_member'

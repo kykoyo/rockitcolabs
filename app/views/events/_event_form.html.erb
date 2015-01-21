@@ -40,7 +40,9 @@
 	<%= label_tag 'Participants Info' %>(ex: email, name, phone number)<br>  
 	<%= text_area_tag 'Participants_Info', @user_info, row:5 %>
 </p>
-
+<p>
+	<%= f.hidden_field :token, value: @token %>
+</p>
 <p>
 	<%= f.submit %>
 </p>

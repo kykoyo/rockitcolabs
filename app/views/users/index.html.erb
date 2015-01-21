@@ -20,36 +20,45 @@
 	<tr>
 		<td>Name</td>
 		<td>Type</td>
-		<td>Email</td>
+<!-- 		<td>Email</td>
 		<td>Phone</td>
-		<td>Adding Start Time</td>
+ -->		<td>Adding Start Time</td>
 		<td>Adding End Time</td>
 		<td>Entering Start Time</td>
 		<td>Entering End Time</td>
-		<% if current_user.user_type=='superadmin' %>
-		<td>Edit</td>
+	<% if current_user.user_type=='superadmin' %>
+		<td>Quick Update</td>
+<!-- 		<td>Edit</td> -->
 		<td>Delete</td>
-		<% end %>
+	<% end %>
 	</tr>
 	<% @users.each do |users| %>	
 	<tr>
 		<td><%= users.name %></td>
 		<td><%= users.user_type %></td>
-		<td><%= users.email %></td>
-		<td><%= users.phone %></td>
-		<td><%= users.add_start %></td>
-		<td><%= users.add_end %></td>
-		<td><%= users.ent_start %></td>
-		<td><%= users.ent_end %></td>
-		<% if current_user.user_type=='superadmin' %>
-		<td>
-			<%= link_to image_tag("button_edit.png"), edit_user_registration_path(users.id) %>
-		</td>
+<!-- 		<td><%= users.email %></td>
+		<td><%= users.phone %></td> -->
+	<% if current_user.user_type=='superadmin' && users.user_type!='superadmin' %>
+	<%= form_for users do |f| %>
+		<td><%= f.datetime_select :add_start, default: users.add_start, include_blank: true, discard_year: true, use_month_numbers: true %></td>
+		<td><%= f.datetime_select :add_end, default: users.add_end, include_blank: true, discard_year: true, use_month_numbers: true %></td>
+		<td><%= f.datetime_select :ent_start, default: users.ent_start, include_blank: true, discard_year: true, use_month_numbers: true %></td>
+		<td><%= f.datetime_select :ent_end, default: users.ent_end, include_blank: true, discard_year: true, use_month_numbers: true %></td>
+		<td><%= image_submit_tag("button_edit.png") %>
+<!-- 		<td>
+			<%= link_to image_tag("button_edit.png"), edit_user_registration_path(users) %>
+		</td> -->
 		<td>
 			<%= link_to image_tag("button_delete.png"), user_path(users.id), method: :delete, data: {
 			confirm: "are you sure?"} %>
 		</td>
-		<% end %>
+	<% end %>
+	<% else %>
+		<td><%= users.add_start %></td>
+		<td><%= users.add_end %></td>
+		<td><%= users.ent_start %></td>
+		<td><%= users.ent_end %></td>		
+	<% end %>
 	</tr>
 	<% end %>
 </table>
