@@ -5,7 +5,8 @@ class UsersController < ApplicationController
     #before_filter :check_valid_pre_user, only: :index
 
     def index
-        @pre_user=PreUser.new
+        # @pre_user=PreUser.new
+        # @hidden_token=(0...8).map { (65 + rand(26)).chr }.join
         if current_user==nil
             redirect_to root_path
         #show all users if superadmin

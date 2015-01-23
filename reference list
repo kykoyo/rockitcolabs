@@ -1,6 +1,8 @@
 reference list
 
 
+
+
 migration reference
 http://ruby-rails.hatenadiary.com/entry/20140810/1407634200
 
@@ -16,3 +18,6 @@ http://qiita.com/ainame/items/eb9dcf7862630c44d5e9
 
 devise customizing controller
 http://easyramble.com/cutomize-controllers-on-rails-devise.html
+
+email confirmation for signing up
+http://rails.takayukikoyama.com/login-logout/temporary-onetime-token/

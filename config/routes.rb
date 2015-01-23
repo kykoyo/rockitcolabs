@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
-    :password => 'users/password'
+    :password => 'users/password',
+    :confirmations => 'users/confirmations'
   }
   resources :users
 
@@ -17,9 +18,10 @@ Rails.application.routes.draw do
   resources :charges
 
   devise_scope :user do
+    patch "/confirm"=>"confirmations#confirm"
     root :to => "devise/sessions#new"
-
   end
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
