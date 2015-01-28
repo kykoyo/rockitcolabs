@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
-    :password => 'users/password',
     :confirmations => 'users/confirmations'
   }
   resources :users
@@ -17,8 +16,11 @@ Rails.application.routes.draw do
   #get 'charges/day_pass' => 'charges#day_pass', as: 'day_pass'
   resources :charges
 
+  get 'enter' => 'enter_logs#new', as: 'enter'
+  post 'enter' => 'enter_logs#create', as: 'enter_logs'
+
   devise_scope :user do
-    patch "/confirm"=>"confirmations#confirm"
+    patch "/confirm"=>"users/confirmations#confirm"
     root :to => "devise/sessions#new"
   end
   

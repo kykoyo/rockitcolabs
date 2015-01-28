@@ -1,12 +1,8 @@
 class UsersController < ApplicationController
-    #before_filter :authenticate_user!
+  #need to log in before going any pages
+  before_filter :authenticate_user!
     
-    #clarify if preuser's expired time is valid or not
-    #before_filter :check_valid_pre_user, only: :index
-
     def index
-        # @pre_user=PreUser.new
-        # @hidden_token=(0...8).map { (65 + rand(26)).chr }.join
         if current_user==nil
             redirect_to root_path
         #show all users if superadmin
@@ -47,15 +43,4 @@ class UsersController < ApplicationController
         redirect_to users_path
     end
 
-    private
-
-
-    def check_valid_pre_user
-        @pre_users=PreUser.all
-        @pre_users.each do |pre_user|
-        if pre_user.expired_time<Time.now
-            pre_user.destroy
-        end
-    end
-    end
 end

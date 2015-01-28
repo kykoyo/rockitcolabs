@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
   helper_method :update_user
+  #need to log in before going any pages
+  before_filter :authenticate_user!
   
   def index
     @counter=Event.where(owner_id: current_user).size

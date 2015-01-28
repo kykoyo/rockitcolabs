@@ -1,4 +1,4 @@
-class UserActions
+module UserActions
   def user_permitted_params(user_params_hash)
     # Returns the permitted items in a typical user hash used by Devise
 

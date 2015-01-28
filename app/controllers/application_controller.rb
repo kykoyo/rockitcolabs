@@ -7,9 +7,10 @@ class ApplicationController < ActionController::Base
   #before_filter :authenticate_user!
 
 
+
   protect_from_forgery with: :exception
   def after_sign_in_path_for(resource_or_scope)
-    	users_path
+    users_path
 	end
 
 	def after_sign_out_path_for(resource_or_scope)
@@ -22,9 +23,6 @@ class ApplicationController < ActionController::Base
   	devise_parameter_sanitizer.for(:sign_up) <<:name 
   	devise_parameter_sanitizer.for(:sign_up) <<:phone
   	devise_parameter_sanitizer.for(:sign_up) <<:user_type
-    devise_parameter_sanitizer.for(:account_update) { |u| 
-      u.permit(:password, :password_confirmation, :current_password) 
-    }
 	end
 
 end

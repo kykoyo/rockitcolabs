@@ -2,6 +2,8 @@ reference list
 
 
 
+ruby yield reference
+http://d.hatena.ne.jp/yoshidaa/20090511/1241967137
 
 migration reference
 http://ruby-rails.hatenadiary.com/entry/20140810/1407634200
@@ -18,6 +20,9 @@ http://qiita.com/ainame/items/eb9dcf7862630c44d5e9
 
 devise customizing controller
 http://easyramble.com/cutomize-controllers-on-rails-devise.html
+
+devise encrypting password
+http://hir-aik.hatenablog.com/entry/2014/10/03/181030
 
 email confirmation for signing up
 http://rails.takayukikoyama.com/login-logout/temporary-onetime-token/

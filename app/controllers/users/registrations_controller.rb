@@ -1,5 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-    # before_filter :check_hidden_token, only: :new
+    #need to log in before going any pages
+    before_filter :authenticate_user!
+    before_filter :require_no_authentication, only: [:new, :cancel]
 
     def new
         super
