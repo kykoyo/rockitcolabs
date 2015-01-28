@@ -43,3 +43,8 @@ gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 gem 'dotenv'
 
+group :production do
+  gem 'pg'
+  gem 'rails_12factor'
+end
+
