@@ -25,7 +25,7 @@ class UsersController < ApplicationController
             @user.destroy
         end
         if @user.destroy
-            redirect_to root_path, notice: "User deleted."
+            redirect_to users_path, notice: "User deleted."
         end
         else
             flash[:errors]<<'Invalid user'
