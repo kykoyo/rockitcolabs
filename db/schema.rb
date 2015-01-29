@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124053251) do
+ActiveRecord::Schema.define(version: 20150128184652) do
 
   create_table "charges", force: true do |t|
     t.string   "name"
@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150124053251) do
     t.string   "token"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "day",        limit: 255
+    t.integer  "counter",    limit: 255
   end
 
   create_table "enter_logs", force: true do |t|

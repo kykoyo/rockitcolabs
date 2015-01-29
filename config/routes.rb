@@ -1,28 +1,28 @@
 Rails.application.routes.draw do
 
-  post 'pre_users', to: 'pre_user#create', as: 'pre_users'
-
   devise_for :users, :controllers => {
     :registrations => 'users/registrations',
     :sessions => 'users/sessions',
     :confirmations => 'users/confirmations'
   }
-  resources :users
+
+  resources :users, except: [:new, :show, :create, :edit]
 
   get 'events/new_for_member' => 'events#new_for_member', as: 'new_event_for_member'
-  get 'events/create_for_member' => 'events#create_for_member', as: ''
   resources :events
   
   #get 'charges/day_pass' => 'charges#day_pass', as: 'day_pass'
-  resources :charges
+  resources :charges, except: [:edit, :update, :destroy, :index]
 
   get 'enter' => 'enter_logs#new', as: 'enter'
   post 'enter' => 'enter_logs#create', as: 'enter_logs'
 
   devise_scope :user do
     patch "/confirm"=>"users/confirmations#confirm"
-    root :to => "devise/sessions#new"
   end
+
+  root :to => "enter_logs#new"
+
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

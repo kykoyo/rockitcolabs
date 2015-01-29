@@ -2,24 +2,28 @@ class EventsController < ApplicationController
   helper_method :update_user
   #need to log in before going any pages
   before_filter :authenticate_user!
-  
+
+  #Before Coding: Members are only allowed to make 1 events and 2 invitors
+
   def index
+    #Count admin's events
     @counter=Event.where(owner_id: current_user).size
 
+    #Show events according to variety of user_type
     if current_user==nil
         redirect_to root_path
-    #show all users if superadmin
+    #show all events if superadmin
     elsif current_user.user_type=='superadmin'
         @events=Event.all
     else
-    #show current user's status if not superadimin
+    #show current user's events if not superadimin
         @events=Event.where(owner_id: current_user)
     end
   end
 
-
 	def new
     @event=Event.new
+    #generate token to avoid duplicate events
     @token=(0...8).map { (65 + rand(26)).chr }.join
 
     #filtering if member and redirecting to new_for_member.
@@ -217,6 +221,7 @@ class EventsController < ApplicationController
       all_participants.each do |selected_user|
         # We don't know if this selected user is saved in the database
         if selected_user.id.nil?
+          selected_user.skip_confirmation!
           selected_user.save
         end
         # if there has already been a connection between selected_user and event, don't double-make it

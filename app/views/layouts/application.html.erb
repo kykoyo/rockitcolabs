@@ -9,7 +9,7 @@
 <body>
 	<div class="stable_header">
 		<div class="container">
-			<%= link_to image_tag("rockit_logo.png"), root_path %>
+			<%= link_to image_tag("rockit_logo.png"), users_path %>
 			<h1>RockIT CoLabs Entrance</h1>
 			<!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
     <% if user_signed_in? %> 
@@ -22,9 +22,8 @@
 
     <% else %>
       <%= link_to image_tag('button_login.png', :class => "button_left"), new_user_session_path %> 
-      <!--
-      <%= link_to image_tag('button_signup.png', :class => "button_right"), new_user_registration_path %>
-      -->
+      
+      <%= link_to image_tag('button_enter.png', :class => "button_right"), enter_path %>
     <% end %>
 		</div>
 	</div>

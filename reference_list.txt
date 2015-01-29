@@ -5,6 +5,9 @@ reference list
 ruby yield reference
 http://d.hatena.ne.jp/yoshidaa/20090511/1241967137
 
+sorting at index in users_controller
+http://blog.livedoor.jp/maru_tak/archives/50687894.html
+
 migration reference
 http://ruby-rails.hatenadiary.com/entry/20140810/1407634200
 

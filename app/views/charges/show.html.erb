@@ -1,9 +1,16 @@
 <h2>The Payment Transaction has successfully done</h2>
-
+<% if @user.password %>
 Your daypass account has successfully provided. Please Log in with the password below.
 <br>
 <br>
 <strong><%= @user.password %></strong>
+<% else %>
+Your daypass account has successfully provided. Please log in with your current password. 
+If forget your password, click on the link below.
+<br>
+<br>
+<%= render 'devise/shared/links' %>
+<% end %>
 <br>
 <br>
 <br>
@@ -13,7 +20,7 @@ Your daypass account has successfully provided. Please Log in with the password 
         Email: <%= @charge.email %>
     </li>
     <li>
-        Days: <%= @charge.day %>
+        Days: <%= @charge.counter %>
     </li>
     <li>
         Amount: <%= @amount %>

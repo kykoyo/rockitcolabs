@@ -1,7 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
     #need to log in before going any pages
     before_filter :authenticate_user!
-    before_filter :require_no_authentication, only: [:new, :cancel]
+    before_filter :require_no_authentication, only: :cancel
 
     def new
         super

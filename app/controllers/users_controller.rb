@@ -32,9 +32,7 @@ class UsersController < ApplicationController
         end
     end
 
-    def edit
-        @user=User.find(params[:id])        
-    end
+    #need to cover error processing
     def update
         user_params=params[:user].permit(:add_start, :add_end, :ent_start, :ent_end)
         @user=User.find(params[:id])
