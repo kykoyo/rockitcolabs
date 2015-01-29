@@ -19,5 +19,18 @@ module Rockitcolabs
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :des
-  end
+
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+      address:               'smtp.gmail.com',
+      port:                  587,
+      domain:                'example.com',
+      user_name:             'kykoyo1992@gmail.com',
+      password:              ENV["gmail_app_password"],
+      authentication:        'plain',
+      enable_starttls_auto:  true
+  }
+  ActionMailer::Base.raise_delivery_errors = true
+
+end
 end
