@@ -1,25 +1,3 @@
-
-
-So my problem is I was testing the accounts creation following reference from below.
-
-https://github.com/plataformatec/devise/wiki/How-To:-Override-confirmations-so-users-can-pick-their-own-passwords-as-part-of-confirmation-activation
-https://github.com/plataformatec/devise/wiki/How-To:-Email-only-sign-up
-
-I started from app/view/users//registrations/new.html.erb.
-
-I could actually successed to create account and send email with link to setting password page.
-
-But when clicking update user button, it says routing error unintialized constant ConfirmationsController.
-
-Please help me.
-
-
-
-
-
-
-
-
 == README
 
 This README would normally document whatever steps are necessary to get the

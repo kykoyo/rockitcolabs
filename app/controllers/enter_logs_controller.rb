@@ -14,14 +14,15 @@ class EnterLogsController < ApplicationController
         @enter=EnterLog.new(p)
 
         #initializing error messages
-        flash[:error]=[]
+        flash[:notice]=[]
     
         #Users authentication:
         #Find user by email and compare password
         @user=User.find_by_email(params[:enter_log][:email])
         if @user.valid_password?(params[:enter_log][:password])
             #check for their enter allowed time
-            if @user.ent_start!=nil&&@user.ent_end!=nil&&Time.now.between?(@user.ent_start, @user.ent_end)
+            t=Time.gm(Time.now.year, Time.now.month, Time.now.day, Time.now.hour, Time.now.min, 0)
+            if @user.ent_start!=nil&&@user.ent_end!=nil&&t.between?(@user.ent_start, @user.ent_end)
                 curl
             else
                 #check if accessable daypass user
@@ -33,16 +34,19 @@ class EnterLogsController < ApplicationController
                 #Always open door if superadmin
                 elsif @user.user_type=='superadmin'
                     curl
+                else
+                    flash[:notice]<<'You are not allowed for now'
                 end
             end
         else
-            flash[:error]<<"Invalid password or email"
+            flash[:notice]<<"Invalid password or email"
         end
 
         #Logging if the user could enter or not
-        if flash[:error].size==0
+        if flash[:notice].size==0
             @enter.enter=true
-            render 'devise/sessions/new'
+            redirect_to new_user_session_path
+            flash[:notice]=nil
         else
             @enter.enter=false
             render 'devise/sessions/new'

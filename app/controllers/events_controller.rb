@@ -200,7 +200,7 @@ class EventsController < ApplicationController
           user_obj = User.find_by_email(email)
           # else create a user and associate to that user.
           if user_obj.nil?
-            user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: '11111111')
+            user_obj=User.new(name: name, email: email, phone: phone, user_type: 'guest', password: 'rockitcolabs')
           end
           all_participants << user_obj
 
@@ -222,10 +222,12 @@ class EventsController < ApplicationController
         # We don't know if this selected user is saved in the database
         if selected_user.id.nil?
           selected_user.skip_confirmation!
-          selected_user.save
         end
+        selected_user.ent_start=@event.start-60*60
+        selected_user.ent_end=@event.end+60*60
+        selected_user.save
         # if there has already been a connection between selected_user and event, don't double-make it
-        if UserEvent.find_by_user_id(selected_user)==nil || UserEvent.find_by_user_id(selected_user).event_id!=@event
+        if UserEvent.find_by_user_id(selected_user).nil? || UserEvent.find_by_user_id(selected_user).event_id!=@event.id
           @event.users << selected_user
         end
       end

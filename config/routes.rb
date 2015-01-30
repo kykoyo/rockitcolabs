@@ -1,10 +1,17 @@
 Rails.application.routes.draw do
 
-  devise_for :users, :controllers => {
-    :registrations => 'users/registrations',
+  devise_for :users, skip: 'registration', :controllers => {
     :sessions => 'users/sessions',
     :confirmations => 'users/confirmations'
   }
+  devise_scope :user do
+    get 'users/cancel'=>'users/registrations#cancel', as: 'cancel_user_registration'
+    get 'users/edit'=>'users/registrations#edit', as: 'edit_user_registration'
+    post 'users'=>'users/registrations#create', as: 'user_registration'
+    put 'users'=>'users/registrations#update'
+    patch 'users'=>'users/registrations#update'
+    delete 'users'=>'users/registrations#destroy'
+  end
 
   resources :users, except: [:new, :show, :create, :edit]
 

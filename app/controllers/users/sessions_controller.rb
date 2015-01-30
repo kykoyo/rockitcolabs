@@ -5,7 +5,7 @@ class Users::SessionsController < Devise::SessionsController
     end
     def create
         user=User.find_by_email(params[:user][:email])
-        if user.user_type=='daypass' || user.user_type=='guest'
+        if user.user_type!='instructor'&&user.user_type!='member'&&user.user_type!='superadmin'
             self.destroy
             flash[:notice]='I am sorry. This is for admin page. Go to Enter page.'
         elsif user.add_start!=nil && user.add_start>=Time.now
