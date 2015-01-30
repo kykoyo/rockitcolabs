@@ -7,7 +7,7 @@ class Users::SessionsController < Devise::SessionsController
         user=User.find_by_email(params[:user][:email])
         if user.user_type!='instructor'&&user.user_type!='member'&&user.user_type!='superadmin'
             self.destroy
-            flash[:notice]='I am sorry. This is for admin page. Go to Enter page.'
+            flash[:notice]='I am sorry. This is for admins. Go to Enter page.'
         elsif user.add_start!=nil && user.add_start>=Time.now
             self.destroy
             flash[:notice]='You are unavailable to log in right now.'

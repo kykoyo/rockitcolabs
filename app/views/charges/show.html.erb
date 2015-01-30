@@ -23,6 +23,8 @@ If forget your password, click on the link below.
         Days: <%= @charge.counter %>
     </li>
     <li>
-        Amount: <%= @amount %>
+        Amount: $<%= @amount/100 %>.00
     </li>
 </ul>
+<br>
+<%= link_to image_tag('button_enter.png', :class => "button_right"), enter_path %>

@@ -1,6 +1,6 @@
 <h2>Day Pass</h2>
 
-<h3>1 day pass</h3>
+<h3>1 day pass: $10.00</h3>
 <%= form_tag charges_path do %>
 
   <%= hidden_field_tag :day, 1 %>
@@ -11,7 +11,7 @@
           data-amount="1500"></script>
 <% end %>
 
-<h3>3 day passes</h3>
+<h3>3 day passes: $25.00</h3>
 <%= form_tag charges_path do %>
 
   <%= hidden_field_tag :day, 3 %>
@@ -22,7 +22,7 @@
           data-amount="2500"></script>
 <% end %>
 
-<h3>5 day passes</h3>
+<h3>5 day passes: $40.00</h3>
 <%= form_tag charges_path do %>
 
   <%= hidden_field_tag :day, 5 %>
@@ -32,4 +32,3 @@
           data-description="5 Day Pass"
           data-amount="4000"></script>
 <% end %>
-

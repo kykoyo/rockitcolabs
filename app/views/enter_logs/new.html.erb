@@ -1,4 +1,6 @@
 <h2>Welcome to RockIT Entrance</h2>
+<br>
+This is enter page. Insert the following info and we will let you in!
 
 <%= form_for @enter do |f| %>
 
@@ -10,8 +12,15 @@
     <%= f.label :password %><br>
     <%= f.password_field  :password %>
 </p>
+
 <p>
     <%= f.submit 'Enter' %>
 </p>
 <% end %>
+<br>
+<%= render 'devise/shared/links'%>
+<br>
+<br>
+<%= link_to image_tag('button_buydaypass.png', :class=>'button_right'), new_charge_path %>
+
 
