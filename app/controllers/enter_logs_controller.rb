@@ -27,8 +27,8 @@ class EnterLogsController < ApplicationController
             else
                 #check if accessable daypass user
                 if @user.user_type=='daypass' && @user.counter!=0 && Time.now.hour.between?(9, 18)
-                    @user.ent_start=Time.now
-                    @user.ent_end=Time.mktime(Time.now.year, Time.now.month, Time.now.day, 18, 0, 0)
+                    @user.ent_start=t
+                    @user.ent_end=Time.gm(Time.now.year, Time.now.month, Time.now.day, 18, 0, 0)
                     @user.counter-=1
                     @user.save
                     curl
