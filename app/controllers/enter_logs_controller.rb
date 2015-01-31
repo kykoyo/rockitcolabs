@@ -30,6 +30,7 @@ class EnterLogsController < ApplicationController
                     @user.ent_start=Time.now
                     @user.ent_end=Time.mktime(Time.now.year, Time.now.month, Time.now.day, 18, 0, 0)
                     @user.counter-=1
+                    @user.save
                     curl
                 #Always open door if superadmin
                 elsif @user.user_type=='superadmin'
